@@ -60,7 +60,7 @@
           phone: $("#phone").val()
         };
 
-
+        //check if form is empty
         if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
           $("#validationMessage").text("Please fill in all fields");
           return;
@@ -72,6 +72,7 @@
           return;
         }
 
+        // POST request
         $.ajax({
           type: "POST",
           url: "http://localhost:3000/details",
@@ -89,7 +90,7 @@
             $("#phone").val("");
           },
           error: function (xhr, status, error) {
-            console.error(xhr.responseText); // Handle error response
+            console.error(xhr.responseText);
           }
         });
       });
@@ -99,20 +100,25 @@
 
         $(".dataWrapper").removeClass("d-none");
 
+        // GET request
         $.ajax({
           type: "GET",
           url: "http://localhost:3000/details",
           success: function (response) {
             console.log(response.data);
+
+            //check if response is empty
             if (response.data.length === 0) {
               $("#err-data").text("No data found");
               return;
             }
 
+            //clear error message
             $("#err-data").text("");
             var $container = $("#dataContainer");
             $container.empty();
 
+            //append new data to container
             $.each(response.data, function (index, item) {
               index = index + 1;
               var $itemDiv = $("<div>").addClass("items");

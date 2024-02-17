@@ -1,0 +1,140 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvian Ghifari - Huawei</title>
+  <link rel="stylesheet" href="public/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <h1 id="title">PERSONAL DETAILS</h1>
+    <form id="myForm">
+      <label for="name">Name *</label><br />
+      <input type="text" id="name" name="name" placeholder="Enter your name here" /><br />
+
+      <label for="email">Email Address *</label><br />
+      <input type="email" id="email" name="email" placeholder="Enter your email here" /><br />
+
+      <label for="phone">Phone Number *</label><br />
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number here" />
+
+      <div id="validationMessage" style="color: red;"></div>
+
+      <div>
+        <p id="hasilform" class="text-center"></p>
+      </div>
+
+      <div id="submitWrapper">
+        <input type="submit" value="SUBMIT" /><br />
+      </div>
+
+    </form>
+    <div id="submitWrapper">
+      <input type="button" id="getDataBtn" value="GET DATA" />
+    </div>
+
+
+    <div class="dataWrapper d-none">
+      <p id="err-data" class="text-center"></p>
+      <div id="dataContainer" class="text-center"></div>
+    </div>
+
+
+
+  </div>
+
+  <script>
+    $(document).ready(function () {
+
+      //Submit form
+      $("#myForm").submit(function (e) {
+        e.preventDefault();
+
+        const formData = {
+          name: $("#name").val(),
+          email: $("#email").val(),
+          phone: $("#phone").val()
+        };
+
+
+        if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+          $("#validationMessage").text("Please fill in all fields");
+          return;
+        }
+
+        //check phone number, should be 0-9 
+        if (!/^[0-9]+$/.test(formData.phone)) {
+          $("#validationMessage").text("Phone number should be numeric");
+          return;
+        }
+
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/details",
+          data: JSON.stringify(formData),
+          contentType: "application/json",
+          success: function (response) {
+            console.log(response);
+            //display none validation message
+            $("#validationMessage").text("");
+            $("#hasilform").text("Data has been submitted");
+
+            //clear form
+            $("#name").val("");
+            $("#email").val("");
+            $("#phone").val("");
+          },
+          error: function (xhr, status, error) {
+            console.error(xhr.responseText); // Handle error response
+          }
+        });
+      });
+
+      //Get data
+      $("#getDataBtn").click(function () {
+
+        $(".dataWrapper").removeClass("d-none");
+
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:3000/details",
+          success: function (response) {
+            console.log(response.data);
+            if (response.data.length === 0) {
+              $("#err-data").text("No data found");
+              return;
+            }
+
+            $("#err-data").text("");
+            var $container = $("#dataContainer");
+            $container.empty();
+
+            $.each(response.data, function (index, item) {
+              index = index + 1;
+              var $itemDiv = $("<div>").addClass("items");
+
+              var indexParagraph = $("<p>").attr("id", "index-" + index).addClass("text-center").text("Data Number " + index);
+              var nameParagraph = $("<p>").attr("id", "name-" + index).addClass("text-center name").text("Name: " + item.name);
+              var emailParagraph = $("<p>").attr("id", "email-" + index).addClass("text-center email").text("Email: " + item.email);
+              var phoneParagraph = $("<p>").attr("id", "phone-" + index).addClass("text-center phone").text("Phone: " + item.phone);
+
+              $itemDiv.append(indexParagraph, nameParagraph, emailParagraph, phoneParagraph);
+
+              $container.append($itemDiv);
+            });
+
+          },
+          error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

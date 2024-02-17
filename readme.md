@@ -129,12 +129,12 @@ Example of response from the `localhost:3000/details` **GET** endpoint
 Soal: Buatlah skrip otomatis menggunakan Selenium atau Puppeteer untuk mengotomatisasi pengujian frontend yang telah Anda bangun pada Hari 1. Skrip harus dapat memasukkan data ke dalam formulir, mengirim formulir, dan memverifikasi bahwa data telah disimpan dengan benar pada server backend yang telah Anda bangun pada Hari 2.
 
 ### Hasil
-Pada soal ini saya membuat dua versi testing. Pertama menggunakan puppeteer saja, dan kedua menggunakan puppeteer dengan jest.
+On this question, I made two testing versions. First using puppeteer only, and second using puppeteer with jest.
 
 #### 1. Puppeteer Only
-Untuk menjalankan testing menggunakan Puppeteer, saya membuat file [`puppeteer-script.js`](puppeteer-script.js). 
+To run the testing using Puppeteer, I created a file [`puppeteer-script.js`](puppeteer-script.js).
 
-Pada file ini, saya membuat script untuk mengisi form, submit form, dan memverifikasi data yang telah disimpan pada server backend. Untuk menjalankan script ini, jalankan:
+On this file, I made a script to fill the form, submit the form, and verify the data that has been saved on the backend server. To run this script, run:
 ```bash
  node puppeteer-script.js
 ```
@@ -142,9 +142,9 @@ Pada file ini, saya membuat script untuk mengisi form, submit form, dan memverif
 
 
 #### 2. Puppeteer with Jest
-Untuk menjalankan testing menggunakan Puppeteer dengan Jest, saya membuat file [`test\frontend.test.js`](https://github.com/alvingxv/huawei-alvian-backend/blob/main/test/frontend.test.js). 
+To run the testing using Puppeteer with Jest, I created a file [`test\frontend.test.js`](https://github.com/alvingxv/huawei-alvian-backend/blob/main/test/frontend.test.js)
 
-Untuk menjalankan script ini, jalankan:
+To run this script, run:
 ```bash
  npm test
 ```

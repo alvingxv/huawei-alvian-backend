@@ -1,4 +1,4 @@
-# Project Name
+# Huawei Technical Test - Alvian Ghifari Backend
 
 
 ## Table of Contents
@@ -20,8 +20,8 @@ Make sure you have the following prerequisites installed on your system:
 Below are the steps to run the frontend and backend:
 1. **Clone the Repository**
    ```sh
-    git clone xxx
-    cd project-name
+    git clone https://github.com/alvingxv/huawei-alvian-backend.git
+    cd huawei-alvian-backend
    ```
 
 2. **Install the Dependencies**
@@ -142,7 +142,7 @@ Pada file ini, saya membuat script untuk mengisi form, submit form, dan memverif
 
 
 #### 2. Puppeteer with Jest
-Untuk menjalankan testing menggunakan Puppeteer dengan Jest, saya membuat file  [`test\frontend.test.js`](test\frontend.test.js). 
+Untuk menjalankan testing menggunakan Puppeteer dengan Jest, saya membuat file [`test\frontend.test.js`](https://github.com/alvingxv/huawei-alvian-backend/blob/main/test/frontend.test.js). 
 
 Untuk menjalankan script ini, jalankan:
 ```bash
